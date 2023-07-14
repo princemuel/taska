@@ -1,13 +1,13 @@
-import db from '@/app/database';
-import { environment } from '@/app/env';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import db from "@/app/database";
+import { environment } from "@/app/env";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import {
   getServerSession,
   type NextAuthOptions,
   type TokenSet,
-} from 'next-auth';
-import GithubProvider from 'next-auth/providers/github';
-import GoogleProvider from 'next-auth/providers/google';
+} from "next-auth";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
 const { GITHUB_ID, GITHUB_SECRET, GOOGLE_ID, GOOGLE_SECRET } = environment;
 
@@ -23,9 +23,9 @@ export const options: NextAuthOptions = {
       clientSecret: GOOGLE_SECRET,
       authorization: {
         params: {
-          access_type: 'offline',
-          prompt: 'consent',
-          response_type: 'code',
+          access_type: "offline",
+          prompt: "consent",
+          response_type: "code",
         },
       },
     }),
@@ -34,21 +34,21 @@ export const options: NextAuthOptions = {
   callbacks: {
     async session({ session, user }) {
       const [google] = await db.account.findMany({
-        where: { userId: user.id, provider: 'google' },
+        where: { userId: user.id, provider: "google" },
       });
 
       if (google?.expires_at && google?.expires_at * 1000 < Date.now()) {
         // If the access token has expired, try to refresh it
         try {
-          const response = await fetch('https://oauth2.googleapis.com/token', {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          const response = await fetch("https://oauth2.googleapis.com/token", {
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
               client_id: GOOGLE_ID,
               client_secret: GOOGLE_SECRET,
-              grant_type: 'refresh_token',
-              refresh_token: google.refresh_token || '',
+              grant_type: "refresh_token",
+              refresh_token: google.refresh_token || "",
             }),
-            method: 'POST',
+            method: "POST",
           });
 
           const tokens: TokenSet = await response.json();
@@ -64,14 +64,14 @@ export const options: NextAuthOptions = {
             },
             where: {
               provider_providerAccountId: {
-                provider: 'google',
+                provider: "google",
                 providerAccountId: google.providerAccountId,
               },
             },
           });
         } catch (error) {
-          console.error('Error refreshing access token', error);
-          session.error = 'RefreshAccessTokenError';
+          console.error("Error refreshing access token", error);
+          session.error = "RefreshAccessTokenError";
         }
       }
       return session;
@@ -79,13 +79,12 @@ export const options: NextAuthOptions = {
   },
 
   session: {
-    strategy: 'database',
+    strategy: "database",
     maxAge: 30 * 24 * 60 * 60,
     updateAge: 1 * 24 * 60 * 60,
   },
 
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV === "development",
 };
 
 export const getAuthSession = () => getServerSession(options);
-
