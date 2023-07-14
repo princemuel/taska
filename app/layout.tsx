@@ -1,5 +1,5 @@
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
-import { FontSans } from "./fonts";
+import { FontAccent, FontSans } from "./fonts";
 import "./globals.css";
 
 export const metadata = {
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${FontSans.variable}`}>
+    <html lang="en" className={`${FontSans.variable} ${FontAccent.variable}`}>
       <body>
         {children}
         <VercelAnalytics />
