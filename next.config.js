@@ -5,7 +5,7 @@ const nextConfig = {
     // Dangerously allow production builds to successfully complete even if
     // your project has type errors.
     // !! WARN !!
-    ignoreBuildErrors: true,
+    // ignoreBuildErrors: true,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
@@ -15,13 +15,18 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     typedRoutes: true,
+    serverActions: true,
     webVitalsAttribution: ["CLS", "LCP"],
-    // turbo: {
-    //   loaders: { '.svg': ['@svgr/webpack'] },
-    // },
   },
   images: {
+    domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com"],
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
   webpack(config, { isServer }) {
     if (!isServer) {
