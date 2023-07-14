@@ -8,20 +8,20 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === "production",
   },
-  devIndicators: { buildActivity: true, buildActivityPosition: 'bottom-right' },
+  devIndicators: { buildActivity: true, buildActivityPosition: "bottom-right" },
 
   reactStrictMode: true,
   experimental: {
     typedRoutes: true,
-    webVitalsAttribution: ['CLS', 'LCP'],
+    webVitalsAttribution: ["CLS", "LCP"],
     // turbo: {
     //   loaders: { '.svg': ['@svgr/webpack'] },
     // },
   },
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
   },
   webpack(config, { isServer }) {
     if (!isServer) {
@@ -30,7 +30,7 @@ const nextConfig = {
       };
     }
     const fileLoaderRule = config.module.rules.find((rule) =>
-      rule.test?.test?.('.svg')
+      rule.test?.test?.(".svg")
     );
     config.module.rules.push(
       {
@@ -42,20 +42,20 @@ const nextConfig = {
         test: /\.inline.svg$/i,
         use: [
           {
-            loader: '@svgr/webpack',
+            loader: "@svgr/webpack",
             options: {
               svgo: true,
               svgoConfig: {
                 plugins: [
                   {
-                    name: 'preset-default',
+                    name: "preset-default",
                     params: {
                       overrides: {
                         removeViewBox: false,
                       },
                     },
                   },
-                  'prefixIds',
+                  "prefixIds",
                 ],
               },
             },

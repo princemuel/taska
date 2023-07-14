@@ -46,7 +46,7 @@ namespace Misc {
     I extends unknown[] = [],
     R = never
   > = T extends readonly [infer Head, ...infer Tail]
-    ? TupleEntry<Tail, [...I, unknown], R | [`${I['length']}`, Head]>
+    ? TupleEntry<Tail, [...I, unknown], R | [`${I["length"]}`, Head]>
     : R;
 
   type Entry<T extends {}> = T extends readonly [unknown, ...unknown[]]
@@ -114,7 +114,7 @@ namespace Misc {
   type Compose<
     Arguments extends any[],
     Functions extends any[] = []
-  > = Arguments['length'] extends 0
+  > = Arguments["length"] extends 0
     ? Functions
     : Arguments extends [infer A, infer B]
     ? [...Functions, (arg: A) => B]

@@ -12,10 +12,5 @@
   "arrowParens": "always",
   "semi": true,
   "jsxSingleQuote": false,
-  "useTabs": false,
-
-  "tailwindConfig": "./tailwind.config.js",
-  "tailwindFunctions": ["cn"],
-  "tailwindAttributes": ["tw"],
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "useTabs": false
 }

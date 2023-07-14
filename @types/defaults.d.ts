@@ -6,7 +6,7 @@ type $ElementProps<E extends React.ElementType<any>> = {
 type ElementProps<E extends React.ElementType<any>> = $ElementProps<E> &
   Omit<React.ComponentPropsWithoutRef<E>, keyof $ElementProps<E>>;
 
-interface IconProps extends React.ComponentPropsWithoutRef<'svg'> {}
+interface IconProps extends React.ComponentPropsWithoutRef<"svg"> {}
 
 type PropsFrom<T> = T extends React.FC<infer Props>
   ? Props
@@ -45,5 +45,5 @@ interface PropsWithChildren {
 type Level = [0, 1, 2, 3, 4, 5, 6][number];
 
 interface CSSStyleProps extends React.CSSProperties {
-  '--min-column-size': string;
+  "--min-column-size": string;
 }
