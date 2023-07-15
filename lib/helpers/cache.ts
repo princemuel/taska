@@ -1,4 +1,4 @@
-function cached(getter: ( arg0: any ) => any) {
+function cached(getter: (arg0: any) => any) {
   // A Map from string URLs to WeakRefs of results
   const cache = new Map();
   // Every time after a value is garbage collected, the callback is
@@ -22,3 +22,5 @@ function cached(getter: ( arg0: any ) => any) {
     return value;
   };
 }
+
+export {};
