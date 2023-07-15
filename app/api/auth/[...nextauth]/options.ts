@@ -9,7 +9,8 @@ import {
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
-const { GITHUB_ID, GITHUB_SECRET, GOOGLE_ID, GOOGLE_SECRET } = environment;
+const { GITHUB_ID, GITHUB_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } =
+  environment;
 
 export const options: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -19,8 +20,8 @@ export const options: NextAuthOptions = {
       clientSecret: GITHUB_SECRET,
     }),
     GoogleProvider({
-      clientId: GOOGLE_ID,
-      clientSecret: GOOGLE_SECRET,
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
           access_type: "offline",
@@ -43,8 +44,8 @@ export const options: NextAuthOptions = {
           const response = await fetch("https://oauth2.googleapis.com/token", {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
-              client_id: GOOGLE_ID,
-              client_secret: GOOGLE_SECRET,
+              client_id: GOOGLE_CLIENT_ID,
+              client_secret: GOOGLE_CLIENT_SECRET,
               grant_type: "refresh_token",
               refresh_token: google.refresh_token || "",
             }),
