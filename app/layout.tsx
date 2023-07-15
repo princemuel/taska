@@ -1,5 +1,6 @@
+import { Providers } from "@/providers";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
-import { FontAccent, FontSans } from "./fonts";
+import { fonts } from "./fonts";
 import "./globals.css";
 
 export const metadata = {
@@ -13,9 +14,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${FontSans.variable} ${FontAccent.variable}`}>
+    <html
+      lang="en"
+      className={fonts}
+      data-theme="light"
+      suppressHydrationWarning
+    >
       <body>
-        {children}
+        <Providers>{children}</Providers>
         <VercelAnalytics />
       </body>
     </html>

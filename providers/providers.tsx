@@ -9,8 +9,13 @@ interface Props {
 
 export function Providers({ children }: Props) {
   return (
-    <NextThemeProvider>
-      <SessionProvider>{children}</SessionProvider>;
+    <NextThemeProvider
+      storageKey="page-theme"
+      defaultTheme="system"
+      enableSystem={true}
+      attribute="data-theme"
+    >
+      <SessionProvider>{children}</SessionProvider>
     </NextThemeProvider>
   );
 }
