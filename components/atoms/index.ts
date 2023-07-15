@@ -1,3 +1,3 @@
 export * from "./button";
 export * from "./text";
-export * from "./theme-button";
+export * from "./theme-switch";

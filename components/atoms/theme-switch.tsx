@@ -24,12 +24,13 @@ const Switch = () => {
       className={cn("")}
       onClick={updateTheme}
     >
-      <div className={cn("")}>
-        {!theme ? null : theme === "light" ? (
-          <MoonIcon className="transition-all" />
-        ) : (
-          <SunIcon className="transition-all" />
-        )}
+      <div className={cn("flex items-center")}>
+        {/* {!theme ? null : theme === "light" ? (
+          ) : (
+          )} */}
+
+        <MoonIcon className="transition-all" />
+        <SunIcon className="transition-all" />
       </div>
       <span className="sr-only">Toggle theme</span>
     </button>
