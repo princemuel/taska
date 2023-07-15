@@ -39,7 +39,7 @@ model Journal {
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String? @db.ObjectId
 
-  @@map("invoices")
+  @@map("journals")
 }
 
 model Account {
