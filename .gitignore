@@ -172,3 +172,5 @@ design
 local
 *.local.*
 !README.md
+
+thunder-*

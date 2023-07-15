@@ -1,13 +1,16 @@
+import { cn } from "@/lib";
 import localFont from "next/font/local";
 
-export const FontSans = localFont({
+const FontSans = localFont({
   src: "./roboto-slab.ttf",
   display: "swap",
   variable: "--font-sans",
 });
 
-export const FontAccent = localFont({
+const FontAccent = localFont({
   src: "./roboto-slab.ttf",
   display: "swap",
   variable: "--font-accent",
 });
+
+export const fonts = cn(FontSans.variable, FontAccent.variable);

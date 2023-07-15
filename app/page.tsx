@@ -1,9 +1,15 @@
-import { css } from "@/styled-system/css";
+import { getAuthSession } from "./api/auth/[...nextauth]/options";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getAuthSession();
+
   return (
-    <div className={css({ fontSize: "2xl", fontWeight: "bold" })}>
-      Hello 🐼!
-    </div>
+    <>
+      {session ? (
+        <h1 className="text-5xl">{session?.user?.name}</h1>
+      ) : (
+        <h1 className="text-5xl">You Shall Not Pass!</h1>
+      )}
+    </>
   );
 }
