@@ -1,0 +1,6 @@
+fly.toml
+.git/
+.react-router
+build
+node_modules
+README.md
