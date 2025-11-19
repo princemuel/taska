@@ -1,3 +1,4 @@
+import { IconSun } from "@/assets/icons";
 import type { Route } from "./+types/_index";
 
 export function meta(_args: Route.MetaArgs) {
@@ -8,5 +9,9 @@ export function meta(_args: Route.MetaArgs) {
 }
 
 export default function Page() {
-	return <h1>Home</h1>;
+	return (
+		<h1>
+			Home <IconSun />
+		</h1>
+	);
 }
